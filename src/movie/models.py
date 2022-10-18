@@ -1,0 +1,152 @@
+from django.db import models
+from django.utils.text import slugify
+
+# Create your models here.
+
+class MovieType(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
+
+
+class Subtitle(models.Model):
+    name = models.CharField(max_length=100)
+    subtitle = models.URLField(max_length=250)
+    
+    def __str__(self):
+        return self.name
+
+
+class Actor(models.Model):
+    def image_upload(instance, filename):
+        image_name = slugify(instance.name)
+        image_list = filename.split(".")
+        extension = image_list[len(image_list)-1]
+        return "static/images/actors/%s.%s"%(image_name, extension)
+    
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to=image_upload, max_length=255)
+    wikipedia_url = models.URLField(max_length=250)
+    movies = models.ManyToManyField('Movie', related_name='his_movies')
+    series = models.ManyToManyField('Series', related_name='Played')
+    
+    def save(self, *args, **kwargs):
+        # Logic
+        self.slug = slugify(self.name) 
+        super(Actor,self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name
+    
+
+
+class Movie(models.Model):
+    country_choice = (
+        ('US', 'US'),
+        ('UK', 'UK'),
+        ('Canada', 'Canada'),
+        ('Japan', 'Jaban'),
+        ('Kore', 'Kore'),
+        ('Turkey', 'Turkey'),
+    )
+    movie_language = (
+        ('en', 'English'),
+        ('fr', 'Frensh'),
+        ('sp', 'Spanish'),
+        ('ar', 'Arabic'),
+        ('tr', 'Turkish'),
+        ('gr', 'German'), 
+        ('it', 'Italian')
+    )
+    def image_upload(instance, filename):
+        image_list = filename.split(".")
+        extension = image_list[len(image_list)-1]
+        return "static/images/movies/%s.%s"%(instance.slug, extension)
+    
+    name = models.CharField(max_length=100)
+    type = models.ManyToManyField(MovieType, related_name='movie_type')
+    description = models.TextField(max_length=500)
+    country = models.CharField(max_length=50, choices=country_choice)
+    running_time = models.IntegerField()
+    published_at = models.DateField(auto_now=True)
+    image = models.ImageField(upload_to=image_upload)
+    rate = models.DecimalField(max_digits=3, decimal_places=2)
+    producer = models.CharField(max_length=255)
+    director = models.CharField(max_length=255)
+    trailer = models.URLField(max_length=250)
+    language = models.CharField(max_length=25, choices=movie_language)
+    subtitle = models.OneToOneField(Subtitle, on_delete=models.SET_NULL, null=True, blank=True)
+    actors = models.ManyToManyField(Actor, related_name='movie_actors')
+    slug = models.SlugField(blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        # Logic
+        self.slug = slugify(self.name) 
+        super(Movie,self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name
+
+
+class Series(models.Model):
+    country_choice = (
+        ('US', 'US'),
+        ('UK', 'UK'),
+        ('Canada', 'Canada'),
+        ('Japan', 'Jaban'),
+        ('Kore', 'Kore'),
+        ('Turkey', 'Turkey'),
+    )
+    series_language = (
+        ('en', 'English'),
+        ('fr', 'Frensh'),
+        ('sp', 'Spanish'),
+        ('ar', 'Arabic'),
+        ('tr', 'Turkish'),
+        ('gr', 'German'), 
+        ('it', 'Italian')
+    )
+    def image_upload(instance, filename):
+        image_name = slugify(instance.name)
+        image_list = filename.split(".")
+        extension = image_list[len(image_list)-1]
+        return "static/images/series/%s.%s"%(image_name, extension)
+    
+    name = models.CharField(max_length=150)
+    type = models.ManyToManyField(MovieType, related_name='series_type')
+    description = models.TextField(max_length=500)
+    country = models.CharField(max_length=50, choices=country_choice)
+    image = models.ImageField(upload_to=image_upload)
+    rate = models.DecimalField(max_digits=3, decimal_places=2)
+    season_count = models.IntegerField()
+    epsoide_count = models.IntegerField()
+    producer = models.CharField(max_length=255)
+    director = models.CharField(max_length=255)
+    language = models.CharField(max_length=25, choices=series_language)
+    actors = models.ManyToManyField(Actor, related_name='series_actors')
+    seasons = models.ManyToManyField('Season', related_name='Series_Seasons')
+    
+    def __str__(self):
+        return self.name
+
+
+class Season(models.Model):
+    name = models.CharField(max_length=100)
+    epsoide_count = models.ImageField()
+    production_date = models.DateField()
+    series = models.ManyToManyField(Series, related_name='Series')
+    epsoides = models.ForeignKey('Epsoide', related_name='Season_Epsoides', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+
+
+class Epsoide(models.Model):
+    name = models.CharField(max_length=150)
+    description = models.TextField(max_length=500)
+    trailer = models.URLField(max_length=255)
+    subtitle = models.ForeignKey(Subtitle, related_name='epsoide_subtitle', on_delete=models.SET_NULL, null=True, blank=True)
+    
+    def __str__(self):
+        return self.name
