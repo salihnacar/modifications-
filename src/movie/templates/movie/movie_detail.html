@@ -7,77 +7,70 @@
     <div class="text-bg-image" style="background: url({% static 'assets/images/mid3.jpg' %})">
     </div>
     <div class="container py-5">
-        <div class="d-grid-1 py-lg-4">
+        <div class="d-grid-1 py-lg-4 my-lg-2">
             <div class="text">
-                <h6 class="text-logo">PlayShowz</h6>
-                <h3 class="hny-title"><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-                    voluptate rem ullam dolore Nulla dolorem perferendis inventore! posuere cubilia Curae; Nunc non
-                    risus in justo convallis feugiat.</p>
-
-                <div class="genre-single-page my-lg-5 my-4">
-                    <div class="row ab-grids-sec align-items-center">
-                        <div class="col-lg-4 gen-right">
-                            <a href="#"><img class="img-fluid" src="{% static 'assets/images/m1.jpg' %}"></a>
-                        </div>
-                        <div class="col-lg-8 gen-left pl-lg-4 mt-lg-0 mt-5">
-
-                            <h3 class="hny-title">Rockman</h3>
-                            <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam id
-                                quisquam ipsam
-                                molestiae ad eius accusantium? Nulla dolorem perferendis inventore! posuere cubilia
-                                Curae;
-                                Nunc non risus in justo convallis feugiat.</p>
-                            <ul class="admin-post mt-1">
-                                <li>
-                                    <a href="#"><span class="fa fa-clock-o"></span> 12th May, 2020</a>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="fa fa-user"></span> Admin</a>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="fa fa-heart-o"></span> 50</a>
-                                </li>
-                                <li>
-                                    <a href="#"><span class="fa fa-comments-o"></span> 20
-                                        Comments</a>
-                                </li>
-                            </ul>
-                            <div class="share-more d-flex mt-4">
-                                <a href="#" class="btn read-button">Buy From $10 </a>
-                                <a href="#" class="btn read-button ml-3">Preview</a>
-
+                <h6 class="text-logo">Movies</h6>
+                <h3 class="hny-title">{{movie}}</h3>
+                    <div class="genre-single-page mb-lg-2 mb-2">
+                        <div class="row ab-grids-sec mt-0">
+                            <div class="col-lg-12 gen-right-1">
+                                <div class="mb-3">
+                                    <p><strong>Type : 
+                                        {% for type in movie.type.all %}
+                                        <a href="#" class="read-button ml-0 mt-3" style="
+                                        height: 30px;
+                                        padding: 8px;
+                                        margin-top: 0px;
+                                        line-height: 12px;
+                                        font-size:12px;
+                                        text-decoration: none;">{{type}}</a>
+                                        {% endfor %}
+                                    </strong></p>
+                                </div>
+                                <div class="mb-3">
+                                    <p><b>Duration : {{movie.running_time}}<span style="text-transform: lowercase;">m</span></b></p>
+                                </div>
+                                <div class="mb-3">
+                                    <p><b>Rate : {{movie.rate}} <span style="text-transform: lowercase;">imdb</span></b> </p>
+                                </div>
+                                <div class="mb-3">
+                                    <p><b>Country : {{movie.country}}</b> </p>
+                                </div>
+                                <div class="mb-3">
+                                    <p><b>Language : {{movie.language}}</b> </p>
+                                </div>
+                                <div class="mb-3">
+                                    <p><b>Released : <span style="text-transform: capitalize;">{{movie.released|date:"d.F.Y"}}</span></b> </p>
+                                </div>
                             </div>
-                        </div>
+                        </div><hr>
                     </div>
+                <div class="genre-single-page my-lg-2 my-2">
+                    <div class="row ab-grids-sec align-items-center">
+                        <div class="col-lg-12 gen-right">
+                            <img src="{{movie.image.url}}" width="100%" height="450px">
+                        </div>
+                    </div><hr>
+                </div>
+                <div class="genre-single-page">
+                    <div class="row ab-grids-sec align-items-center">
+                        <div class="col-lg-12" style="font-size:16px;">
+                        {{movie.description}}
+                        </div>
+                    </div><hr>
                 </div>
                 <div class="genre-single-page mb-lg-5 mb-4">
                     <div class="row ab-grids-sec">
-                        <div class="col-lg-5 gen-right-1">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam id quisquam ipsam
-                                molestiae ad eius accusantium? Nulla dolorem perferendis inventore! posuere cubilia
-                                Curae;
-                                Nunc non risus in justo convallis feugiat.</p>
-                        </div>
-                        <div class="col-lg-2 gen-right-1">
+                        <div class="col-lg-12 gen-right-1">
                             <div class="mb-3">
-                                <p><b>Producer :</b> </p>
-                                <p>Jhon Lee </p>
+                                <p><b>Producer : <span style="text-transform: capitalize;">{{movie.producer}}</span></b> </p>
                             </div>
                             <div class="mb-3">
-                                <p><b>Director :</b> </p>
-                                <p>Sanjay Dev </p>
+                                <p><b>Director : <span style="text-transform: capitalize;">{{movie.director}}</span></b> </p>
                             </div>
                             <div class="mb-3">
-                                <p><b>Editor :</b> </p>
-                                <p>Om shakir</p>
+                                <p><b>Editor : <span style="text-transform: capitalize;"></span></b> </p>
                             </div>
-                        </div>
-                        <div class="col-lg-5 gen-right-1">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam id quisquam ipsam
-                                molestiae ad eius accusantium? Nulla dolorem perferendis inventore! posuere cubilia
-                                Curae;
-                                Nunc non risus in justo convallis feugiat.</p>
                         </div>
                     </div>
                 </div>
@@ -100,7 +93,7 @@
                                 <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
                                 <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
                                     {% comment %} <iframe src="https://www.youtube.com/watch?v=YsB-eQ474Is" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" __idm_id__="3432449"></iframe> {% endcomment %}
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Tv81q3MeI_U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe width="560" height="315" src="{{movie.trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>

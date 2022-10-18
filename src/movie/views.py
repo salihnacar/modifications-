@@ -12,7 +12,8 @@ def movies_list(request):
     return render(request, 'movie/movies_list.html', context)
 
 
-def movie_details(request):
+def movie_details(request, slug):
+    movie = Movie.objects.get(slug=slug)
     
-    context = {}
+    context = {'movie': movie}
     return render(request, 'movie/movie_detail.html', context)
