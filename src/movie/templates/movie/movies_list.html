@@ -14,19 +14,10 @@
                     <div class="slider-info banner-view bg bg2" style="background: url({{movie.image.url}}) no-repeat center;
                     background-size: cover;">
                         <div class="banner-info">
-                            <h3>{{movie}}</h3>
-                            <p>{{movie.description}}</p>
-                            <a href="#small-dialog1" class="popup-with-zoom-anim play-view1">
-                                <span class="video-play-icon">
-                                    <span class="fa fa-play"></span>
-                                </span>
-                                <h6>Watch Trailer</h6>
+                            <a href="{% url 'movies:movie_details' movie.slug %}">
+                                <h3>{{movie}}</h3>
                             </a>
-                            <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
-                            <div id="small-dialog1" class="zoom-anim-dialog mfp-hide">
-                                <iframe src="{{movie.trailer}}" allow="autoplay; fullscreen"
-                                    allowfullscreen=""></iframe>
-                            </div>
+                            <p>{{movie.description}}</p>
                         </div>
                     </div>
                 </li>
