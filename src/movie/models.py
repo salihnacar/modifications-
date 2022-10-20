@@ -28,8 +28,8 @@ class Actor(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to=image_upload, max_length=255)
     wikipedia_url = models.URLField(max_length=250)
-    movies = models.ManyToManyField('Movie', related_name='his_movies')
-    series = models.ManyToManyField('Series', related_name='Played')
+    movies = models.ManyToManyField('Movie', related_name='his_movies', blank=True)
+    series = models.ManyToManyField('Series', related_name='Played', blank=True)
     
     def save(self, *args, **kwargs):
         # Logic
@@ -65,7 +65,7 @@ class Movie(models.Model):
         return "static/images/movies/%s.%s"%(instance.slug, extension)
     
     name = models.CharField(max_length=100)
-    type = models.ManyToManyField(MovieType, related_name='movie_type')
+    type = models.ManyToManyField(MovieType, related_name='movie_type', blank=True)
     description = models.TextField(max_length=500)
     country = models.CharField(max_length=50, choices=country_choice)
     running_time = models.IntegerField()
@@ -78,7 +78,7 @@ class Movie(models.Model):
     trailer = models.URLField(max_length=250)
     language = models.CharField(max_length=25, choices=movie_language)
     subtitle = models.OneToOneField(Subtitle, on_delete=models.SET_NULL, null=True, blank=True)
-    actors = models.ManyToManyField(Actor, related_name='movie_actors')
+    actors = models.ManyToManyField(Actor, related_name='movie_actors', blank=True)
     slug = models.SlugField(blank=True, null=True)
     
     def save(self, *args, **kwargs):
@@ -115,7 +115,7 @@ class Series(models.Model):
         return "static/images/series/%s.%s"%(image_name, extension)
     
     name = models.CharField(max_length=150)
-    type = models.ManyToManyField(MovieType, related_name='series_type')
+    type = models.ManyToManyField(MovieType, related_name='series_type', blank=True)
     description = models.TextField(max_length=500)
     country = models.CharField(max_length=50, choices=country_choice)
     image = models.ImageField(upload_to=image_upload)
@@ -125,8 +125,8 @@ class Series(models.Model):
     producer = models.CharField(max_length=255)
     director = models.CharField(max_length=255)
     language = models.CharField(max_length=25, choices=series_language)
-    actors = models.ManyToManyField(Actor, related_name='series_actors')
-    seasons = models.ManyToManyField('Season', related_name='Series_Seasons')
+    actors = models.ManyToManyField(Actor, related_name='series_actors', blank=True)
+    seasons = models.ManyToManyField('Season', related_name='Series_Seasons', blank=True)
     
     def __str__(self):
         return self.name
@@ -136,7 +136,7 @@ class Season(models.Model):
     name = models.CharField(max_length=100)
     epsoide_count = models.ImageField()
     production_date = models.DateField()
-    series = models.ManyToManyField(Series, related_name='Series')
+    series = models.ManyToManyField(Series, related_name='Series', blank=True)
     epsoides = models.ForeignKey('Epsoide', related_name='Season_Epsoides', on_delete=models.CASCADE)
     
     def __str__(self):
