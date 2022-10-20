@@ -1,5 +1,6 @@
 {% extends 'base2.html' %}
 {% load static %}
+{% load django_template_maths %}
 
 {% block content %}    
 
@@ -43,18 +44,21 @@
                 </div>
             </div>
             <div class="w3l-populohny-grids">
+                
+                {% for movie in popular_4 %}
+                    
                 <div class="item vhny-grid">
-                    <div class="box16">
-                        <a href="genre.html">
-                            <figure>
-                                <img class="img-fluid" src="{% static 'assets/images/m7.jpg' %}" alt="">
+                    <div style="width:250px; height:350px" class="box16">
+                        <a href="{% url 'movies:movie_details' movie.slug %}">
+                            <figure style="width:250px; height:350px">
+                                <img style="width:250px; height:350px" class="img-fluid" src="{{movie.image.url}}" alt="">
                             </figure>
                             <div class="box-content">
                                 <h3 class="title">Frozen 2</h3>
-                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 1 Hr 4min
-
-                                    </span>
-
+                                <h4> <span class="post"><span class="fa fa-clock-o">
+                                </span>
+                                {{movie.running_time|div:60|add_decimal:0}} Hr {{movie.running_time|mod:60|add_decimal:0}}min
+                                </span>
                                     <span class="post fa fa-heart text-right"></span>
                                 </h4>
                             </div>
@@ -62,63 +66,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="item vhny-grid">
-                    <div class="box16">
-                        <a href="genre.html">
-                            <figure>
-                                <img class="img-fluid" src="{% static 'assets/images/m3.jpg' %}" alt="">
-                            </figure>
-                            <div class="box-content">
-                                <h3 class="title">Knives Out</h3>
-                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 1 Hr 4min
 
-                                    </span>
+                {% endfor %}
 
-                                    <span class="post fa fa-heart text-right"></span>
-                                </h4>
-                            </div>
-                            <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="item vhny-grid">
-                    <div class="box16">
-                        <a href="genre.html">
-                            <figure>
-                                <img class="img-fluid" src="{% static 'assets/images/m4.jpg' %}" alt="">
-                            </figure>
-                            <div class="box-content">
-                                <h3 class="title">Little Women</h3>
-                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 1 Hr 4min
-
-                                    </span>
-
-                                    <span class="post fa fa-heart text-right"></span>
-                                </h4>
-                            </div>
-                            <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="item vhny-grid">
-                    <div class="box16">
-                        <a href="genre.html">
-                            <figure>
-                                <img class="img-fluid" src="{% static 'assets/images/m5.jpg' %}" alt="">
-                            </figure>
-                            <div class="box-content">
-                                <h3 class="title">Jumanji</h3>
-                                <h4> <span class="post"><span class="fa fa-clock-o"> </span> 1 Hr 4min
-
-                                    </span>
-
-                                    <span class="post fa fa-heart text-right"></span>
-                                </h4>
-                            </div>
-                            <span class="fa fa-play video-icon" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

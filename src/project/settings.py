@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     
     # My Apps 
     'movie',
+    'django_template_maths',
 ]
 
 MIDDLEWARE = [
