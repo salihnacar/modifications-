@@ -28,8 +28,7 @@ class Actor(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to=image_upload, max_length=255)
     wikipedia_url = models.URLField(max_length=250)
-    movies = models.ManyToManyField('Movie', related_name='his_movies', blank=True)
-    series = models.ManyToManyField('Series', related_name='Played', blank=True)
+    slug = models.SlugField(blank=True, null=True)
     
     def save(self, *args, **kwargs):
         # Logic
@@ -71,7 +70,7 @@ class Movie(models.Model):
     running_time = models.IntegerField()
     published_at = models.DateField(auto_now=True)
     released = models.DateField(null=True, blank=True)
-    image = models.ImageField(upload_to=image_upload)
+    image = models.ImageField(upload_to=image_upload, max_length=255)
     rate = models.DecimalField(max_digits=2, decimal_places=1)
     producer = models.CharField(max_length=255)
     director = models.CharField(max_length=255)
@@ -118,7 +117,7 @@ class Series(models.Model):
     type = models.ManyToManyField(MovieType, related_name='series_type', blank=True)
     description = models.TextField(max_length=500)
     country = models.CharField(max_length=50, choices=country_choice)
-    image = models.ImageField(upload_to=image_upload)
+    image = models.ImageField(upload_to=image_upload, max_length=255)
     rate = models.DecimalField(max_digits=3, decimal_places=2)
     season_count = models.IntegerField()
     epsoide_count = models.IntegerField()
