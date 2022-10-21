@@ -106,10 +106,10 @@
                     {% for actor in movie.actors.all %}
                     <div class="media mt-5">
                         <div class="img-circle">
-                            <img src="{{actor.image.url}}" class="mr-3 rounded-circle" alt="...">
+                            <a href="{% url 'movies:actor' actor.slug %}"><img src="{{actor.image.url}}" class="mr-3 rounded-circle" alt="..."></a>
                         </div>
                         <div class="media-body">
-                            <h5 class="mt-0">{{actor}}</h5>
+                            <a href="{% url 'movies:actor' actor.slug %}"><h5 class="mt-0">{{actor}}</h5></a>
                         </div>
                     </div>
                     {% endfor %}
