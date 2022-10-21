@@ -8,4 +8,5 @@ urlpatterns = [
     path('movie_details/<slug:slug>', views.movie_details, name='movie_details'),
     path('actor/<slug:slug>', views.actor_details, name='actor'),
     path('all', views.all_movies, name="all"),
+    path('type/<slug:slug>', views.movies_in_type, name='type'),
 ]

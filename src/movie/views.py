@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Movie, Actor
+from .models import Movie, Actor, MovieType
 
 # Create your views here.
 
@@ -39,3 +39,11 @@ def all_movies(request):
     
     context = {'my_popular': my_popular, 'all_movies': all_movies}
     return render(request, 'movie/all_movies.html', context)
+
+
+def movies_in_type(request, slug):
+    type = MovieType.objects.get(slug=slug)
+    movies = Movie.objects.filter(type=type.id)
+    
+    context = {'movies': movies, 'type': type}
+    return render(request, 'movie/movies_of_type.html', context)

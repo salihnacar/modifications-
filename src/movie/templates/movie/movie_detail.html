@@ -17,7 +17,7 @@
                                 <div class="mb-3">
                                     <p><strong>Type : 
                                         {% for type in movie.type.all %}
-                                        <a href="#" class="read-button ml-0 mt-3" style="
+                                        <a href="{% url 'movies:type' type.slug %}" class="read-button ml-0 mt-3" style="
                                         height: 30px;
                                         padding: 8px;
                                         margin-top: 0px;
