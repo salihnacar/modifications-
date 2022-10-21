@@ -27,3 +27,15 @@ def actor_details(request, slug):
     
     context = {'actor': actor, 'movies': movies}
     return render(request, 'movie/actor.html', context)
+
+
+def all_movies(request):
+    first_3 = Movie.objects.all().order_by('rate')[0:3]
+    second_3 = Movie.objects.all().order_by('rate')[3:6]
+    my_popular = zip(first_3, second_3)
+    
+    all_movies = Movie.objects.all().order_by('-id')
+    print(all_movies)
+    
+    context = {'my_popular': my_popular, 'all_movies': all_movies}
+    return render(request, 'movie/all_movies.html', context)
