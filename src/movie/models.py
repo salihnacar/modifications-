@@ -156,7 +156,7 @@ class Season(models.Model):
         super(Season,self).save(*args, **kwargs)
     
     def __str__(self):
-        return str(self.series) + ' ' + self.name 
+        return self.name 
 
 
 class Epsoide(models.Model):
