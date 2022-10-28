@@ -147,7 +147,7 @@ class Season(models.Model):
     epsoide_count = models.IntegerField()
     production_date = models.DateField()
     trailer = models.URLField(max_length=255)
-    series = models.ManyToManyField(Series, related_name='Series')
+    series = models.ForeignKey(Series, related_name='Series', on_delete=models.CASCADE)
     slug = models.SlugField(blank=True, null=True)
     
     def save(self, *args, **kwargs):
@@ -156,12 +156,12 @@ class Season(models.Model):
         super(Season,self).save(*args, **kwargs)
     
     def __str__(self):
-        return self.name
+        return str(self.series) + ' ' + self.name 
 
 
 class Epsoide(models.Model):
     name = models.CharField(max_length=150)
-    rate = models.DecimalField(max_digits=3, decimal_places=2)
+    rate = models.DecimalField(max_digits=2, decimal_places=1)
     season = models.ForeignKey(Season, related_name='season', on_delete=models.CASCADE)
     description = models.TextField(max_length=500)
     subtitle = models.ForeignKey(Subtitle, related_name='epsoide_subtitle', on_delete=models.SET_NULL, null=True, blank=True)
