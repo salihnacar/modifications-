@@ -71,3 +71,12 @@ def epsoide_details(request, slug):
     
     context = {'epsoide': epsoide}
     return render(request, 'movie/epsoide_details.html', context)
+
+
+def all_series(request):
+    all_series = Series.objects.all().order_by('-id')
+    
+    print(all_series)
+    
+    context = {'all_series': all_series}
+    return render(request, 'movie/all_series.html', context)

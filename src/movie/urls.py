@@ -10,6 +10,7 @@ urlpatterns = [
     path('all', views.all_movies, name="all"),
     path('type/<slug:slug>', views.movies_in_type, name='type'),
     path('series_details/<slug:slug>', views.series_details, name='series_details'),
-    path('<slug:slug>', views.show_epsoides, name='season'),
+    path('season/<slug:slug>', views.show_epsoides, name='season'),
     path('epsoide/<slug:slug>', views.epsoide_details, name='epsoide_details'),
+    path('all_series', views.all_series, name='all_series'),
 ]
