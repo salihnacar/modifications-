@@ -66,8 +66,8 @@ def show_epsoides(request, slug):
     return render(request, 'movie/epsoides.html', context)
 
 
-def epsoide_details(request, id):
-    epsoide = Epsoide.objects.get(id=id)
+def epsoide_details(request, slug):
+    epsoide = Epsoide.objects.get(slug=slug)
     
     context = {'epsoide': epsoide}
     return render(request, 'movie/epsoide_details.html', context)
