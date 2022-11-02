@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     
     # My Apps 
     'movie',
+    'about',
+    'contact',
     'django_template_maths',
 ]
 
