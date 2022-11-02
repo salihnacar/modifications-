@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 # Create your models here.
+unique_slug = 0
 
 class MovieType(models.Model):
     name = models.CharField(max_length=100)
@@ -38,7 +39,9 @@ class Actor(models.Model):
     
     def save(self, *args, **kwargs):
         # Logic
-        self.slug = slugify(self.name) 
+        global unique_slug
+        unique_slug += 1
+        self.slug = slugify(self.name) + "."+str(unique_slug)
         super(Actor,self).save(*args, **kwargs)
     
     def __str__(self):
@@ -88,7 +91,9 @@ class Movie(models.Model):
     
     def save(self, *args, **kwargs):
         # Logic
-        self.slug = slugify(self.name) 
+        global unique_slug
+        unique_slug += 1
+        self.slug = slugify(self.name) + "." + str(unique_slug)
         super(Movie,self).save(*args, **kwargs)
     
     def __str__(self):
@@ -135,7 +140,9 @@ class Series(models.Model):
     
     def save(self, *args, **kwargs):
         # Logic
-        self.slug = slugify(self.name) 
+        global unique_slug
+        unique_slug += 1
+        self.slug = slugify(self.name) + "." + str(unique_slug)
         super(Series,self).save(*args, **kwargs)
 
     def __str__(self):
@@ -152,7 +159,9 @@ class Season(models.Model):
     
     def save(self, *args, **kwargs):
         # Logic
-        self.slug = slugify(self.name) 
+        global unique_slug
+        unique_slug += 1
+        self.slug = slugify(self.name) + "." + str(unique_slug)
         super(Season,self).save(*args, **kwargs)
     
     def __str__(self):
@@ -170,7 +179,9 @@ class Epsoide(models.Model):
     
     def save(self, *args, **kwargs):
         # Logic
-        self.slug = slugify(self.name) 
+        global unique_slug
+        unique_slug += 1
+        self.slug = slugify(self.name) + "." + str(unique_slug) 
         super(Epsoide,self).save(*args, **kwargs)
     
     def __str__(self):
