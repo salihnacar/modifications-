@@ -111,7 +111,7 @@
                         </a>
                     </div>
                     <h3> <a class="title-gd" href="genre.html">{{movie}}</a></h3>
-                    <p><strong>Rate: </strong>{{movie.rate}}</p>
+                    <p><strong>Rate: </strong>{{movie.rate}} IMDB</p>
                     <p><strong>Released: </strong>{{movie.released}}</p>
                     <div class="button-center text-center mt-4">
                         <a href="{% url 'movies:movie_details' movie.slug %}" class="btn watch-button">Watch now</a>
@@ -159,7 +159,7 @@
                         </a>
                     </div>
                     <h3> <a class="title-gd" href="{% url 'movies:series_details' seri.slug %}">{{seri}}</a></h3>
-                    <p><strong>Rate: </strong>{{seri.rate}}</p>
+                    <p><strong>Rate: </strong>{{seri.rate}} IMDB</p>
                     {% comment %} <p><strong>Released: </strong>{{movie.released}}</p> {% endcomment %}
                     <div class="button-center text-center mt-4">
                         <a href="#" class="btn watch-button">Watch now</a>

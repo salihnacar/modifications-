@@ -124,7 +124,7 @@ class Series(models.Model):
     description = models.TextField(max_length=500)
     country = models.CharField(max_length=50, choices=country_choice)
     image = models.ImageField(upload_to=image_upload, max_length=255)
-    rate = models.DecimalField(max_digits=3, decimal_places=2)
+    rate = models.DecimalField(max_digits=2, decimal_places=1)
     season_count = models.IntegerField()
     epsoide_count = models.IntegerField()
     producer = models.CharField(max_length=255)
