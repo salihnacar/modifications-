@@ -3,9 +3,196 @@
 
 {% block content %}
 
+
+    
+   
+
+
+
+
 <section class="w3l-text-8 genre-single">
-    <div class="text-bg-image" style="background: url({{movie.image.url}})">
+
+ 
+    
+      
+  
+
+ 
+
+<!-- here is the code that i added starts -->
+ 
+<style>
+    td{
+        color:var(--theme-title)
+    }
+     
+    table{
+     
+  
+    }
+    .properties-of-movies{
+        color: #0066cc;
+        font:16px droid sans;
+        font-weight: 200;
+    }
+</style>
+
+
+<div class="container" style="margin-top:8%  ; color:var(--theme-title)  ;">
+
+    <div class="row"> 
+
+<table class="table table-bordered table-hover  col-7  " >
+    <thead>
+     <tr>
+      <th colspan="2">
+        {{movie}} 
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+             <tr>
+               <td> TYPE </td>
+               <td>  <div class="mb-3">
+                <p><strong>
+                    {% for type in movie.type.all %}
+                    <a href="{% url 'movies:type' type.slug %}" class="read-button ml-0 mt-3" style="
+                    height: 30px;
+                    padding: 8px;
+                    margin-top: 0px;
+                    line-height: 12px;
+                    font-size:12px;
+                    text-decoration: none;">{{type}}</a>
+                    {% endfor %}
+                </strong></p>
+            </div></td>
+             </tr>
+             <tr>
+                <td> Duration</td>
+                <td>  
+                         <p  class="properties-of-movies">{{movie.running_time}}m</b></p>
+                    
+                </td>
+              </tr>
+              <tr>
+                <td> Rate</td>
+                <td>  
+                    <p class="properties-of-movies"> {{movie.rate}} imdb</b> </p>
+                </td>
+              </tr>
+              <tr>
+                <td> Country</td>
+                <td>  
+                    <p class="properties-of-movies">{{movie.country}} </p>
+                </td>
+              </tr>
+              <tr>
+                <td> Language </td>
+                <td> 
+                    <p class="properties-of-movies">{{movie.language}} </p>
+               </td>
+              </tr>
+              <tr>
+                <td> Release Date</td>
+                <td>    
+                    <p class="properties-of-movies"> {{movie.released|date:"d.F.Y"}} </p>
+                </td>
+              </tr>
+           
+   
+
+    </tbody>
+    
+
+  </table>
+ <div class=" col-5 pr-0 ">
+  <img src="{{movie.image.url}}"  height="470px "  style="width:100%  ;  ">
+</div>
+  </div>
+
+</div>
+
+<div class="row d-flex flex-row-reverse  ">
+
+    <a class="btn btn-success col-5  mr-4  mt-1 " href="#watchbtn" > Watch </a>
+
     </div>
+
+    <!-- here is the story of the movie -->
+    <div class="description-of-mv d-flex flex-column  justify-content-center mt-5 ml-5">
+        <div class="upper-div   "  style="height:50px ; width:98%; background-color: rgb(181, 176, 176); text-align: center; color: black; font-weight: bold; border-radius: 5px;" >
+            The Story
+        </div>
+    
+        <div class="lower-div pl-2 " style=" min-height: 100px; width:98%; background-color: rgb(223, 215, 215); color: rgb(14, 13, 13);  border-radius: 5px  ; "> 
+            {{movie.description}}
+        </div>
+    
+    </div>
+
+<!-- here is the producer and editor details  -->
+    <div class="description-of-mv d-flex flex-column  justify-content-center mt-5 ml-5">
+        <div class="upper-div  pl-1  "  style="height:50px ; width:98%; background-color: rgb(181, 176, 176);  color: black; font-weight: bold; border-radius: 5px; text-align: center;" >
+                              Movie Details
+        </div>
+        <div class="lower-div pl-2 " style="  min-height: 100px; width:98%; background-color: rgb(223, 215, 215); color: rgb(14, 13, 13);  border-radius: 5px ; "> 
+            Producer : {{movie.producer}} <br>
+            Editor : {{movie.editor}} <br>
+            Director : {{movie.director}} <br>
+        </div>
+       
+    </div>
+    
+</div>
+
+<!-- here for the video -->
+
+<div  class="container   mr-4 mt-2 ">
+
+    <div class="row   justify-content-center ">
+    <div class="p-0 m-0    col-12  text-center font-weight-bold text-dark bg-light   rounded  "  >
+        Watch 
+    </div>
+    </div>
+<div class="row justify-content-center "> 
+   
+<div class="w3l-about4 col-12    " id="about">
+    <div class="new-block">
+        <div class="pop-img-ab position-relative" id="watchbtn">
+            <div class="history-info">
+               
+
+                <a href="#small-dialog" class="popup-with-zoom-anim play-view text-center position-absolute">
+                    <span class="video-play-icon">
+                        <span class="fa fa-play"></span>
+                    </span>
+                </a>
+
+                <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
+                <div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+                     
+                    <iframe width="560" height="315" src="{{movie.trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<!-- and here it ends  -->
+
+
+
+
+
+    
     <div class="container py-5">
         <div class="d-grid-1 py-lg-4 my-lg-2">
             <div style="color:var(--theme-title)" class="text">
@@ -76,7 +263,7 @@
                 </div>
                 <div class="w3l-about4" id="about">
                     <div class="new-block">
-                        <div class="pop-img-ab position-relative">
+                        <div class="pop-img-ab position-relative" >
                             <div class="history-info">
                                 <!-- <a href="#popup-video" class="play-view text-center position-absolute">
                                               <span class="video-play-icon">
@@ -137,7 +324,7 @@
                                     </div>
                                 </a>
                                 <div class="media-body">
-                                    <h5 class="mt-0">Benjamin Lucas</h5>
+                                    <h5 class="mt-0">Benjamin Lucas<d-flex align-items-center justify-content-center/h5>
                                     <span class="time">4 hours ago</span>
                                     <p>In gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
                                         purus odio. Fusce condimentum nunc ac nisi vulputate
